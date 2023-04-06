@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../cssFiles/stylesNavBar.css">
+    <link rel="stylesheet" href="../cssFiles/stylesNavList.css">
+<!--    <link rel="stylesheet" href="../cssFiles/stylesTable.css">-->
+    <link rel="stylesheet" href="../cssFiles/styles.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<nav id="NavigationBar">
+    <ul>
+        <li><a href="#" id="title">CMS</a></li>
+        <li class = "moveTextToRight">
+            <div class="name">Pavlo Hertsun</div>
+            <div class="formFromUser" id="YourInfoLine">
+                <button>Your info</button>
+                <div class="formText">
+                    <button>Settings</button>
+                </div>
+                <div class="formText">
+                    <button>Log out</button>
+                </div>
+            </div>
+        </li>
+        <li class = "moveTextToRight">
+            <span class="glyphicon glyphicon-user iconsClass"></span>
+        </li>
+        <li class = "moveTextToRight">
+            <div class="notification"><span class="glyphicon glyphicon-bell iconsClass"></span></div>
+            <div class="formFromNotifications">
+                <ul class="NotificationsUL">
+                    <li class = "liOfNotificationUL">
+                        <a href="#">Vytalyk</a>
+                        <p>Go drink 21 nalyvka!</p>
+                    </li>
+                    <li class = "liOfNotificationUL">
+                        <a href="#"></a>Veronika</a>
+                        <p>Vitalik durak has injured my lip!</p>
+                    </li>
+                    <li class = "liOfNotificationUL">
+                        <a href="#">Ivan</a>
+                        <p>Mene ne bude!</p>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<div id="dialogContainer"></div>
+
+<div class="containerNavList">
+    <div class="row">
+        <div class="col-2" id="NavigationList">
+            <ul class="List">
+                <li>
+                    <button onclick="dashboard()">Dashboard</button>
+                </li>
+                <li>
+                    <button onclick="students()">Students</button>
+                </li>
+                <li>
+                    <button onclick="tasks()">Tasks</button>
+                </li>
+            </ul>
+        </div>
+        <div class="col-9" id="toChange">
+
+        </div>
+    </div>
+</div>
+<script src = "../jsFiles/navList.js"></script>
+<script src = "../jsFiles/addEditForm.js"></script>
+<script src = "../jsFiles/addEditFunctions.js"></script>
+</body>
+</html>

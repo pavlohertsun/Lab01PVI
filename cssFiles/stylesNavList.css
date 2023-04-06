@@ -1,0 +1,28 @@
+.List button{
+    color:black;
+    text-decoration: none;
+    list-style: none;
+    font-size: 22px;
+    border:none;
+    background-color: white;
+}
+.List li{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+#NavigationList{
+    align-items: center;
+    display: flex;
+}
+.row{
+    height: 100%;
+    align-items: center;
+    display: flex;
+}
+.containerNavList{
+    height: 100vh;
+}
+.List button{
+    text-align: left;
+}
