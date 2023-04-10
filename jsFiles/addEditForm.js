@@ -17,12 +17,39 @@ function openAddDialog(){
         });
     }).css("display","block");
 }
-function openDeleteDialog(button){
-    $('#dialogContainer').load("/htmlFiles/deleteFormFile.html", function(){
-        $('#cancelDeleteButton').on("click",function (){
+function openEditDialog(button){
+    $('#dialogContainer').load("/htmlFiles/addEditFormFile.html", function () {
+        let name = $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(1).text();
+        let group = $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(2).text();
+        let gender = $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(3).text();
+        let birthday = $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(4).text();
+        pushInfoIntoEditForm(name, group, gender, birthday);
+        $('#cancelButton').on("click",function (){
             $('#dialogContainer').css("display", "none");
         });
-        $('#submitDeleteButton').on("click",function (){
+        $('#idForm').submit(function (event){
+            event.preventDefault();
+            let data = $(this).serialize();
+            let fields = data.split('&');
+            let object = {};
+
+            $.each(fields, function(index, field){
+                object[field.split('=')[0]] = field.split("=")[1];
+            });
+            editStudent(object.nameInput, object.groupInput, object.genderInput, object.birthdayInput, button);
+            $('#dialogContainer').css("display", "none").html("");
+        });
+
+    }).css("display","block");
+}
+function openDeleteDialog(button){
+    $('#dialogContainer').load("/htmlFiles/deleteFormFile.html", function(){
+        $('#cancelDeleteButton').on("click",function (event){
+            event.preventDefault();
+            $('#dialogContainer').css("display", "none");
+        });
+        $('#idDeleteForm').submit(function (event){
+            event.preventDefault();
             let idOfDeletingStudent = $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(7).text();
             deleteStudent(button, idOfDeletingStudent);
             $('#dialogContainer').css("display", "none");

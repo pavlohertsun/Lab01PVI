@@ -1,25 +1,4 @@
-/*#myTable{*/
-/*    width:100%;*/
-/*}*/
-/*#myTable th,td,tr{*/
-/*    border: 1px solid #171414;*/
-/*    border-collapse: collapse;*/
-/*}*/
 thead th{
     text-align: center;
     align-items: center;
 }
-/*.tableText{*/
-/*    color:#171414;*/
-/*    font-size: 15px;*/
-/*}*/
-/*.studentsTitle{*/
-/*    width: 100%;*/
-/*}*/
-/*.moveToLeft{*/
-/*    text-align: right;*/
-/*}*/
-/*.studentsTitle button{*/
-/*    width: 50px;*/
-/*    height: 25px;*/
-/*}*/

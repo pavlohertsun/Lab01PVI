@@ -1,13 +1,26 @@
 <div class="formToAdd" id="idFormToAdd">
-    <form id="idForm">
+    <form id="idForm" class="formClass">
         <label for="nameInput">Enter name</label>
         <input type="text" id="nameInput" name="nameInput">
-        <label for="groupInput">Enter name</label>
-        <input type="text" id="groupInput" name="groupInput">
-        <label for="genderInput">Enter name</label>
-        <input type="text" id="genderInput" name="genderInput">
-        <label for="birthdayInput">Enter name</label>
+        <br>
+        <label for="groupInput">Enter group</label>
+        <select name="groupInput" id="groupInput" required>
+            <option value="">Select group</option>
+            <option value="PZ-24">PZ-24</option>
+            <option value="PZ-25">PZ-25</option>
+            <option value="PZ-26">PZ-26</option>
+        </select>
+        <br>
+        <label for="genderInput">Enter gender</label>
+        <select name="genderInput" id="genderInput" required>
+            <option value="">Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        <br>
+        <label for="birthdayInput">Enter birthday</label>
         <input type="date" id="birthdayInput" name="birthdayInput">
+        <br>
         <input type="submit" value = "Submit" id="submitButton">
         <input type="button" value="Cancel" id="cancelButton">
         <input type="text" hidden="hidden" name="idOfHiddenInput">
