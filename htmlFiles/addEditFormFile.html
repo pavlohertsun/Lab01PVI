@@ -1,7 +1,7 @@
 <div class="formToAdd" id="idFormToAdd">
     <form id="idForm" class="formClass">
         <label for="nameInput">Enter name</label>
-        <input type="text" id="nameInput" name="nameInput">
+        <input type="text" id="nameInput" name="nameInput" pattern="^[A-Za-zA-Яа-я. -]*$" required>
         <br>
         <label for="groupInput">Enter group</label>
         <select name="groupInput" id="groupInput" required>

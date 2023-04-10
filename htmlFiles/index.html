@@ -17,7 +17,24 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script>
+        if('serviceWorker' in navigator)
+    {
+        window.addEventListener('load',()=>
+        {
+            navigator.serviceWorker.register('../jsFiles/sv.js').then(registration =>
+            {
+                console.log('ServiceWorker registred');
+                console.log(registration.scope);
 
+            },err=>
+            {
+                console.log(err);
+                console.log('ServiceWorker failed');
+            });
+        });
+    }
+    </script>
 </head>
 <body>
 <nav id="NavigationBar">

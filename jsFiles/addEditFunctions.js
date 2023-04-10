@@ -10,6 +10,20 @@ function addStudent(name, group, gender, birthday){
         newRow.append($('<td><button onclick="openDeleteDialog(this)">D</button><button onclick="openEditDialog(this)">E</button></td>'));
         newRow.append($('<td style="display: none">').text(generatedID++));
         $('#myTable').append(newRow);
+        addStudentToDB(name, group, gender, birthday);
+}
+function addStudentToDB(nameInput, groupInput, genderInput,birthdayInput){
+        $.ajax({
+                url: "../phpFiles/addStudent.php",
+                type: "POST",
+                data:{name:nameInput, group:groupInput, gender:genderInput, birthday:birthdayInput},
+                success : function (response){
+                        console.log(response);
+                },
+                error : function (jqXHR, textStatus, errorThrown){
+                        console.error("Error :" + textStatus, errorThrown);
+                }
+        });
 }
 function deleteStudent(button, id){
         $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).remove();

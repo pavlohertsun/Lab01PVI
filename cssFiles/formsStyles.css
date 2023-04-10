@@ -11,11 +11,37 @@
     transform: translate(-50%, -50%);
     z-index: 9999;
     background-color: white;
+    padding: 10px;
+}
+
+.formToAdd {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.formClass input {
     padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
-.formToAd {
-
+.formClass select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
 }
+
+.formClass label {
+    padding: 5px;
+    font-size: 16px;
+}
+#cancelButton{
+    floar:right;
+}
+
 
 
