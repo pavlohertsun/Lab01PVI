@@ -7,8 +7,6 @@ if ('serviceWorker' in navigator) {
         });
     });
 }
-
-// Додавання файлів для кешування
 const CACHE_NAME = 'my-site-cache-v1';
 const urlsToCache = [
         '../cssFiles/stylesNavBar.css',

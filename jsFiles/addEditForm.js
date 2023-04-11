@@ -36,6 +36,8 @@ function openEditDialog(button){
             $.each(fields, function(index, field){
                 object[field.split('=')[0]] = field.split("=")[1];
             });
+            let idOfEditingStudent = $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(7).text();
+            editStudentInDB(object.nameInput, object.groupInput, object.genderInput, object.birthdayInput, idOfEditingStudent);
             editStudent(object.nameInput, object.groupInput, object.genderInput, object.birthdayInput, button);
             $('#dialogContainer').css("display", "none").html("");
         });
@@ -51,8 +53,9 @@ function openDeleteDialog(button){
         $('#idDeleteForm').submit(function (event){
             event.preventDefault();
             let idOfDeletingStudent = $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(7).text();
+            deleteStudentFromDB(idOfDeletingStudent);
             deleteStudent(button, idOfDeletingStudent);
-            $('#dialogContainer').css("display", "none");
+            $('#dialogContainer').css("display", "none").html("");
         });
     }).css("display","block");
 

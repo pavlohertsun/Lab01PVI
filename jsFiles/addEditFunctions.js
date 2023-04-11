@@ -21,12 +21,25 @@ function addStudentToDB(nameInput, groupInput, genderInput,birthdayInput){
                         console.log(response);
                 },
                 error : function (jqXHR, textStatus, errorThrown){
-                        console.error("Error :" + textStatus, errorThrown);
+                        console.error("Error while adding:" + textStatus, errorThrown);
                 }
         });
 }
 function deleteStudent(button, id){
         $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).remove();
+}
+function deleteStudentFromDB(id){
+        $.ajax({
+                url: "../phpFiles/deleteStudent.php",
+                type: "POST",
+                data:{id},
+                success : function (response){
+                        console.log(response);
+                },
+                error : function (jqXHR, textStatus, errorThrown){
+                        console.error("Error while deleting:" + textStatus, errorThrown);
+                }
+        });
 }
 function editStudent(name, group, gender, birthday, button){
         $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(1).text(name);
@@ -34,10 +47,22 @@ function editStudent(name, group, gender, birthday, button){
         $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(3).text(gender);
         $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(4).text(birthday);
 }
-
 function pushInfoIntoEditForm(name, group, gender, birthday){
         $('#nameInput').val(name);
         $('#groupInput').val(group);
         $('#genderInput').val(gender);
         $('#birthdayInput').val(birthday);
+}
+function editStudentInDB(nameInput, groupInput, genderInput, birthdayInput, id){
+        $.ajax({
+                url: "../phpFiles/editStudent.php",
+                type: "POST",
+                data:{name:nameInput, group:groupInput, gender:genderInput, birthday:birthdayInput, id},
+                success : function (response){
+                        console.log(response);
+                },
+                error : function (jqXHR, textStatus, errorThrown){
+                        console.error("Error while adding:" + textStatus, errorThrown);
+                }
+        });
 }
