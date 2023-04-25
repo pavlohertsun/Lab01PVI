@@ -10,7 +10,6 @@ function addStudent(name, group, gender, birthday){
         newRow.append($('<td><button onclick="openDeleteDialog(this)">D</button><button onclick="openEditDialog(this)">E</button></td>'));
         newRow.append($('<td style="display: none">').text(generatedID++));
         $('#myTable').append(newRow);
-        addStudentToDB(name, group, gender, birthday);
 }
 function addStudentToDB(nameInput, groupInput, genderInput,birthdayInput){
         $.ajax({
@@ -65,4 +64,30 @@ function editStudentInDB(nameInput, groupInput, genderInput, birthdayInput, id){
                         console.error("Error while adding:" + textStatus, errorThrown);
                 }
         });
+}
+function birthdayCheck(birthday){
+        let dataMax = new Date().toISOString().split("T")[0];
+        if(birthday > dataMax){
+                alert("Choose correct date");
+                return false;
+        }
+        return true;
+}
+function checkInputs(){
+        let mainCheckBox = $('#myTable tr').eq(0).find('td').eq(0).checked;
+        if(mainCheckBox){
+              const checkBoxArray = $('#myTable tr').find('td').eq(0);
+              checkBoxArray.forEach( checkbox =>{
+                      const check = checkbox.querySelector("input[type='checkbox']");
+                      check.checked = true;
+              });
+
+        }
+        else{
+                const checkBoxArray = $('#myTable tr').find('td').eq(0);
+                checkBoxArray.forEach( checkbox =>{
+                        const check = checkbox.querySelector("input[type='checkbox']");
+                        check.checked = false;
+                });
+        }
 }

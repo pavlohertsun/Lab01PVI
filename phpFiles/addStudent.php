@@ -1,4 +1,5 @@
 <?php
+//var_dump($_SERVER);
 $name = $_POST["name"];
 $group = $_POST["group"];
 $gender = $_POST["gender"];

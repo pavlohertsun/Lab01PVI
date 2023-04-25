@@ -1,0 +1,8 @@
+{
+  "name": "Lab01PVI",
+  "short_name": "Lab01PVI",
+  "background_color": "#2196f3",
+  "display": "browser",
+  "orientation": "portrait",
+  "start_url": "."
+}

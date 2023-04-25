@@ -12,6 +12,8 @@ function openAddDialog(){
             $.each(fields, function(index, field){
                 object[field.split('=')[0]] = field.split("=")[1];
             });
+            if(!birthdayCheck(object.birthdayInput)) return;
+            addStudentToDB(object.nameInput, object.groupInput, object.genderInput, object.birthdayInput);
             addStudent(object.nameInput, object.groupInput, object.genderInput, object.birthdayInput);
             $('#dialogContainer').css("display", "none").html("");
         });
@@ -58,5 +60,4 @@ function openDeleteDialog(button){
             $('#dialogContainer').css("display", "none").html("");
         });
     }).css("display","block");
-
 }
