@@ -1,8 +1,8 @@
 {
-  "name": "Lab01PVI",
-  "short_name": "Lab01PVI",
-  "background_color": "#2196f3",
-  "display": "browser",
-  "orientation": "portrait",
-  "start_url": "."
+  "theme_color" : "aliceblue",
+  "background_color" : "#f69435",
+  "display" : "standalone",
+  "start_url" : ".",
+  "name" : "Lab01PVI",
+  "short_name" : "lab"
 }

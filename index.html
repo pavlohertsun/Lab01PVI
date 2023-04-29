@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="cssFiles/styles.css">
     <link rel="stylesheet" href="cssFiles/formsStyles.css">
 
-    <link rel="manifest" href="./manifest.json">
+    <link rel="manifest" href="/manifest.json">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -88,18 +88,16 @@
 <script>
     if('serviceWorker' in navigator)
     {
-        window.addEventListener('load',()=>
+        window.addEventListener('load', async ()=>
         {
-            navigator.serviceWorker.register('./sw.js').then(registration =>
+            try
             {
-                console.log('ServiceWorker registred');
-                console.log(registration.scope);
-
-            },err=>
+                const reg = await navigator.serviceWorker.register('/sw.js')
+                console.log('Service worker register success', reg)
+            } catch (e)
             {
-                console.log(err);
-                console.log('ServiceWorker failed');
-            });
+                console.log('Service worker register fail')
+            }
         });
     }
 </script>

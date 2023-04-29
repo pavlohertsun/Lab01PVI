@@ -39,6 +39,7 @@ function openEditDialog(button){
                 object[field.split('=')[0]] = field.split("=")[1];
             });
             let idOfEditingStudent = $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(7).text();
+            if(!birthdayCheck(object.birthdayInput)) return;
             editStudentInDB(object.nameInput, object.groupInput, object.genderInput, object.birthdayInput, idOfEditingStudent);
             editStudent(object.nameInput, object.groupInput, object.genderInput, object.birthdayInput, button);
             $('#dialogContainer').css("display", "none").html("");
