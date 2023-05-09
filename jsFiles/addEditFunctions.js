@@ -1,5 +1,4 @@
-let generatedID = 0;
-function addStudent(name, group, gender, birthday){
+function addStudent(id, name, group, gender, birthday,status){
         let newRow=$('<tr>');
         newRow.append($('<td><input type="checkbox" onchange="checkInputs2(this), checkInputs3(this)"></td>'));
         newRow.append($('<td>').text(name));
@@ -8,30 +7,32 @@ function addStudent(name, group, gender, birthday){
         newRow.append($('<td>').text(birthday));
         newRow.append($('<td><input type="radio" checked="checked"></td>'));
         newRow.append($('<td><button onclick="openDeleteDialog(this)">D</button><button onclick="openEditDialog(this)">E</button></td>'));
-        newRow.append($('<td style="display: none">').text(generatedID++));
+        newRow.append($('<td style="display: none">').text(id));
         $('#myTable').append(newRow);
 }
 function addStudentToDB(nameInput, groupInput, genderInput,birthdayInput){
         $.ajax({
-                url: "../phpFiles/addStudent.php",
+                url: "./phpFiles/addStudent.php",
                 type: "POST",
                 data:{name:nameInput, group:groupInput, gender:genderInput, birthday:birthdayInput},
                 success : function (response){
-                        console.log(response);
+                        addStudent(response, nameInput, groupInput, genderInput,birthdayInput, 1);
+                        console.log("New student successfully added with id :" + response);
                 },
                 error : function (jqXHR, textStatus, errorThrown){
                         console.error("Error while adding:" + textStatus, errorThrown);
+                        return null;
                 }
         });
 }
-function deleteStudent(button, id){
+function deleteStudent(button){
         $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).remove();
 }
 function deleteStudentFromDB(id){
         $.ajax({
-                url: "../phpFiles/deleteStudent.php",
+                url: "./phpFiles/deleteStudent.php",
                 type: "POST",
-                data:{id},
+                data:{id:id},
                 success : function (response){
                         console.log(response);
                 },
@@ -54,9 +55,9 @@ function pushInfoIntoEditForm(name, group, gender, birthday){
 }
 function editStudentInDB(nameInput, groupInput, genderInput, birthdayInput, id){
         $.ajax({
-                url: "../phpFiles/editStudent.php",
+                url: "./phpFiles/editStudent.php",
                 type: "POST",
-                data:{name:nameInput, group:groupInput, gender:genderInput, birthday:birthdayInput, id},
+                data:{name:nameInput, group:groupInput, gender:genderInput, birthday:birthdayInput, id:id},
                 success : function (response){
                         console.log(response);
                 },

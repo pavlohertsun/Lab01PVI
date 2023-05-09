@@ -5,5 +5,5 @@ function dashboard(){
     $('#toChange').html("");
 }
 function students(){
-    $('#toChange').load("/htmlFiles/tableFile.html");
+    $('#toChange').load("./htmlFiles/tableFile.html");
 }

@@ -1,5 +1,5 @@
 function openAddDialog(){
-    $('#dialogContainer').load("/htmlFiles/addEditFormFile.html", function(){
+    $('#dialogContainer').load("./htmlFiles/addEditFormFile.html", function(){
         $('#cancelButton').on("click",function (){
             $('#dialogContainer').css("display", "none");
         });
@@ -14,13 +14,12 @@ function openAddDialog(){
             });
             if(!birthdayCheck(object.birthdayInput)) return;
             addStudentToDB(object.nameInput, object.groupInput, object.genderInput, object.birthdayInput);
-            addStudent(object.nameInput, object.groupInput, object.genderInput, object.birthdayInput);
             $('#dialogContainer').css("display", "none").html("");
         });
     }).css("display","block");
 }
 function openEditDialog(button){
-    $('#dialogContainer').load("/htmlFiles/addEditFormFile.html", function () {
+    $('#dialogContainer').load("./htmlFiles/addEditFormFile.html", function () {
         let name = $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(1).text();
         let group = $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(2).text();
         let gender = $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(3).text();
@@ -48,7 +47,7 @@ function openEditDialog(button){
     }).css("display","block");
 }
 function openDeleteDialog(button){
-    $('#dialogContainer').load("/htmlFiles/deleteFormFile.html", function(){
+    $('#dialogContainer').load("./htmlFiles/deleteFormFile.html", function(){
         $('#cancelDeleteButton').on("click",function (event){
             event.preventDefault();
             $('#dialogContainer').css("display", "none");
@@ -57,7 +56,7 @@ function openDeleteDialog(button){
             event.preventDefault();
             let idOfDeletingStudent = $('#myTable tr').eq(button.parentNode.parentNode.rowIndex).find('td').eq(7).text();
             deleteStudentFromDB(idOfDeletingStudent);
-            deleteStudent(button, idOfDeletingStudent);
+            deleteStudent(button);
             $('#dialogContainer').css("display", "none").html("");
         });
     }).css("display","block");

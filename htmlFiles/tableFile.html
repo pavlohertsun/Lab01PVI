@@ -16,3 +16,20 @@
     </tr>
     </tbody>
 </table>
+<script>
+    $.ajax({
+        url: "./phpFiles/getStudentsFromDB.php",
+        type: "POST",
+        datatype:"json",
+        success : function (response){
+            var students = JSON.parse(response);
+            $.each(students, function(i, student){
+                addStudent(student.id, student.name, student.sgroup, student.gender, student.birthday, student.status);
+            });
+        },
+        error : function (jqXHR, textStatus, errorThrown){
+            console.error("Error while adding:" + textStatus, errorThrown);
+        }
+    });
+
+</script>
