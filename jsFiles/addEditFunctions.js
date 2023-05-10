@@ -6,7 +6,7 @@ function addStudent(id, name, group, gender, birthday,status){
         newRow.append($('<td>').text(gender));
         newRow.append($('<td>').text(birthday));
         newRow.append($('<td><input type="radio" checked="checked"></td>'));
-        newRow.append($('<td><button onclick="openDeleteDialog(this)">D</button><button onclick="openEditDialog(this)">E</button></td>'));
+        newRow.append($('<td><button onclick="openDeleteDialog(this)"><span class="glyphicon glyphicon-trash"></span></button><button onclick="openEditDialog(this)"><span class="glyphicon glyphicon-pencil"></span></button></td>'));
         newRow.append($('<td style="display: none">').text(id));
         $('#myTable').append(newRow);
 }
@@ -137,5 +137,34 @@ function checkInputs3(checkBox){
                 });
                 let mainCheckBox = $('#checkBox');
                 mainCheckBox.prop('checked', allChecked);
+        }
+}
+function checkInputName(name){
+        let firstChar = name.charAt(0);
+        if(firstChar === firstChar.toUpperCase()){
+                return true;
+        }
+        else{
+                alert("Incorrect name input(name should start with uppercase symbol)");
+                return false;
+        }
+}
+function checkInputNameLength(name) {
+        if (name.length <= 3) {
+                alert("Incorrect name input(to less symbols)");
+                return false;
+        }
+        else{
+                return true;
+        }
+}
+function checkInputNameSpecialSymbols(name){
+        let regex = /[!@#$%^&*(),.?":{}|<>]/;
+        if (regex.test(name)) {
+                alert("Incorrect name input(name should not contain any special characters)");
+                return false;
+        }
+        else {
+                return true;
         }
 }

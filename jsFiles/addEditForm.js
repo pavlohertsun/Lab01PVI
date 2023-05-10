@@ -13,6 +13,9 @@ function openAddDialog(){
                 object[field.split('=')[0]] = field.split("=")[1];
             });
             if(!birthdayCheck(object.birthdayInput)) return;
+            if(!checkInputName(object.nameInput)) return;
+            if(!checkInputNameLength(object.nameInput)) return;
+            if(!checkInputNameSpecialSymbols(object.nameInput)) return;
             addStudentToDB(object.nameInput, object.groupInput, object.genderInput, object.birthdayInput);
             $('#dialogContainer').css("display", "none").html("");
         });
