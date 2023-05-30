@@ -8,6 +8,9 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <style>
+        body{
+            background-color: #95cbe7;
+        }
         .login-form-container {
             border: 1px solid black;
             border-radius: 10px;
@@ -38,17 +41,16 @@
         .login-form-container input[type="submit"] {
             width: 100%;
             padding: 10px;
-            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 3px;
             cursor: pointer;
         }
 
-        .login-form-container .error-message {
-            color: #ff0000;
-            margin-bottom: 10px;
-        }
+        /*.login-form-container .error-message {*/
+        /*    color: #ff0000;*/
+        /*    margin-bottom: 10px;*/
+        /*}*/
     </style>
 </head>
 <body>
@@ -57,7 +59,7 @@
     <form id="LogInForm" method="get" action="http://localhost:8080/chat">
     <label for="logInNameInput">Enter name</label>
     <input type="text" id="logInNameInput" name="username" pattern="^[A-Za-zA-Яа-я. -]*$" required>
-    <input type="submit" value ="Submit" id="LogInFormSubmitButton">
+    <input type="submit" value ="Submit" id="LogInFormSubmitButton" class="btn btn-primary">
     </form>
 </div>
 </body>
