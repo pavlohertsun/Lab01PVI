@@ -19,15 +19,15 @@ let availableUsers = [];
 let users = [];
 let connections = [];
 
-fillAvailableUsers();
+fillChatUsers();
 app.get('/chat', async function (req, res) {
     let nameParam = req.query.username;
     users.push(nameParam);
     availableUsers = [];
-    await fillAvailableUsers();
+    await fillChatUsers();
     console.log("available users " + availableUsers);
     if (availableUsers.find(username => username === nameParam) === undefined) {
-        res.redirect(404, '/not-found');
+        res.redirect(  '/registrationForm');
         return;
     }
     let urlToFile = 'C:\\xampp\\htdocs\\Lab01PVI\\chat.html';
@@ -52,6 +52,18 @@ io.sockets.on('connection', function (socket) {
         });
     });
     socket.emit("getAllChats", availableUsers);
+    socket.on("reqLastChatMessage", async function(userFrom,userTo){
+        let messagesArray = await messages.find({
+            $or: [
+                { from: userFrom, to: userTo },
+                { from: userTo, to: userFrom }
+            ]
+        }).toArray();
+        console.log(messagesArray);
+        let lMessage = null;
+        if(messagesArray.length > 0) lMessage = messagesArray[messagesArray.length - 1];
+        socket.emit("getLastChatMessage", lMessage);
+    });
 
     socket.on('sendMessage', function (data, username, userTo) {
         messages.insertOne({
@@ -80,7 +92,7 @@ io.sockets.on('connection', function (socket) {
         socket.emit("getMessagesBySenderAndReceiver", filteredMessages);
     });
 });
-async function fillAvailableUsers() {
+async function fillChatUsers() {
     const connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',

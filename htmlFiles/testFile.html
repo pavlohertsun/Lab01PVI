@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <style>
+        /* Стилі для контейнера чату */
+        .chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Стилі для повідомлень у чаті */
+        .chat-messages {
+            margin-bottom: 10px;
+        }
+
+        /* Стилі для форми введення повідомлення */
+        .chat-form {
+            display: flex;
+        }
+
+        .chat-form input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .chat-form button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="chat-container">
+    <div class="chat-messages">
+        <!-- Тут будуть відображатися повідомлення у чаті -->
+    </div>
+    <form class="chat-form">
+        <input type="text" id="messageInput" placeholder="Введіть повідомлення...">
+        <button type="submit">Відправити</button>
+    </form>
+</div>
+
+<script>
+    // JavaScript-код для обробки відправки повідомлень і отримання нових повідомлень через WebSocket або Ajax запити
+</script>
+</body>
+</html>
