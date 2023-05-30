@@ -4,17 +4,24 @@ $group = $_POST["group"];
 $gender = $_POST["gender"];
 $birthday = $_POST["birthday"];
 
+$host = 'localhost';
+$dbname = 'MyDataBase_PVI';
+$username = 'root';
+$password = '';
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $connection = mysqli_connect("localhost", "root", "", "MyDataBase_PVI");
-    if ($connection == false) {
-        die("ERROR: Cannot connect the data base"
-            . mysqli_connect_error());
+    try {
+        $connection = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        $statement = $connection->prepare("INSERT INTO Students VALUES (null, :name, :group, :gender, :birthday, 1)");
+        $statement->bindParam(":name", $name);
+        $statement->bindParam(":group", $group);
+        $statement->bindParam(":gender", $gender);
+        $statement->bindParam(":birthday", $birthday);
+        $statement->execute();
+        echo $connection->lastInsertId();
+        $connection = null;
+    } catch (PDOException $e) {
+        echo 'Помилка підключення до бази даних: ' . $e->getMessage();
     }
-    $statement = $connection->prepare("INSERT INTO Students VALUES (null, ?, ?, ?, ?, 1)");
-    $statement->bind_param("ssss", $name, $group, $gender, $birthday);
-    $statement->execute();
-    echo $connection->insert_id;
-    $connection->close();
 }
 
 

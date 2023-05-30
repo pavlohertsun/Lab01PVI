@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script>
+        function getCurrentTime() {
+            let currentTime = new Date();
+            let hours = currentTime.getHours();
+            let minutes = currentTime.getMinutes();
+
+            let ampm = hours >= 12 ? 'PM' : 'AM'; // визначення AM або PM
+
+            hours = hours % 12; // переведення у формат 12-годинника
+            hours = hours ? hours : 12; // 12 година має бути 12, а не 0
+
+
+            let timeString = hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ' ' + ampm;
+            return timeString;
+        }
+    </script>
+    <style>
+
+        .chatContainer {
+
+            background-color: #e3e3e3;
+            color: #323233;
+            text-align: left;
+            padding-top: 20px;
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+
+        }
+
+        .chatContainer span {
+            font-size: 20px;
+        }
+
+        .chatContainer p {
+            font-size: 15px;
+        }
+
+        .chatContainer img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .chats {
+
+            margin: 12px 0 0;
+            padding: 0;
+        }
+
+        .messages {
+            padding: 20px 15px 15px 15px;
+        }
+
+        button {
+            border: none; /* Видаляємо границю */
+            padding: 0; /* Видаляємо відступи зі всіх сторін */
+            background: none; /* Видаляємо фон */
+            cursor: pointer; /* Змінюємо курсор під час наведення на кнопку */
+        }
+
+        .scroll-container {
+            height: 400px;
+            max-height: 600px; /* максимальна висота контейнера */
+            overflow-y: auto; /* скролінг по вертикалі */
+            overflow-x: hidden; /* скролінг по вертикалі */
+            max-width: 500px;
+            word-wrap: break-word;
+        }
+
+        #messageBox {
+            height: 400px;
+            overflow-y: scroll;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+
+        .messageHeader {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .messageFrom {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .messageTime {
+            color: #999;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="row" style="margin-top: 70px;">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <p id="userNameId" style="font-size: 30px"></p>
+        <div class="row" style="height: 1000px">
+            <div class="col-2 chats" id="chats">
+                <div class="container-fluid chatContainer">
+                    <button onclick="changeChat('All')">
+                        <img src="data:image/png;base64,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"
+                             alt="NoPhotoFound1">
+                        <span>ALL</span>
+                        <p>LastMessage: </p>
+
+                    </button>
+                </div>
+
+
+            </div>
+
+            <div class="col-10 messages">
+                <div class="col-md-8 offset-md-2">
+                    <div class="chat-box">
+                        <div id="allMessages" class="chat-history scroll-container">
+
+                        </div>
+                        <div class="chat-input">
+                            <form id="messForm">
+                                <div class="form-group">
+                                    <textarea id="message" class="form-control"
+                                              placeholder="Type your message here..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-2"></div>
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<script>
+    let userName;
+    let userToHim = "All";
+    let socket = io.connect();
+    let $allMessages = $('#allMessages');
+
+    $(document).ready(function () {
+        userName = getParameterByName('username');
+        $(`#userNameId`).text(`Username: ${userName}`);
+        socket.emit('settingUser', userName);
+    });
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+
+    $(function () {
+        let $form = $('#messForm');
+        let $input = $('#message');
+
+        socket.on("getAllChats", function (users) {
+            users.forEach(function (userName) {
+                $('#chats')
+                    .append(
+                        '<div class="container-fluid chatContainer">' +
+                        `<button onclick="changeChat('${userName}')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" ` +
+                        'alt="NoPhotoFound1">' +
+                        `<span>${userName}</span>` +
+                        '<p>LastMessage: </p>' +
+                        '</button>' +
+                        '</div>');
+            });
+        });
+
+        $form.submit(function (event) {
+            event.preventDefault();
+            socket.emit('sendMessage', $input.val(), userName, userToHim);
+            $input.val('');
+        });
+
+        socket.on('addMessage', function (data) {
+            if (userName === data.userTo && userToHim === data.username
+                || userName === data.username && userToHim === data.userTo){
+                $allMessages.append(`<div class="message">
+                <div class="messageHeader">
+                    <p class="messageFrom">${data.username}</p>
+                    <p class="messageTime">${getCurrentTime()}</p>
+                </div>
+                <p class="messageBody">${data.msg}</p>
+            </div>`);
+            }
+        });
+
+    });
+
+    function changeChat(userTo) {
+        userToHim = userTo;
+        socket.emit("sendMessagesBySenderAndReceiver", userName, userTo);
+        socket.on("getMessagesBySenderAndReceiver", function (messages) {
+            $allMessages.empty();
+            messages.forEach(function (message) {
+                $allMessages.append(
+                    `<div class="message">
+                <div class="messageHeader">
+                    <p class="messageFrom">${message.from}</p>
+                    <p class="messageTime">${getCurrentTime()}</p>
+                </div>
+                <p class="messageBody">${message.message}</p>
+            </div>`)
+            });
+        });
+    }
+</script>
+</body>
+</html>
